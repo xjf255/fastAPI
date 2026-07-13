@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import date
 from typing import Optional
 
@@ -6,7 +6,7 @@ class LibroSchema(BaseModel):
     id: int
     titulo: str
     autor: str
-    fecha_publicacion: Optional[date] = date.today()
+    fecha_publicacion: Optional[date] = Field(default_factory=date.today)
     disponible: Optional[bool] = True
 
 class LibroResponseSchema(LibroSchema):
@@ -26,7 +26,7 @@ class EstudianteResponseSchema(EstudianteSchema):
 class CreatePrestamoSchema(BaseModel):
     libro_id: int
     estudiante_id: int
-    fecha_prestamo: Optional[date] = date.today()
+    fecha_prestamo: Optional[date] = Field(default_factory=date.today)
     fecha_devolucion: Optional[date] = None
     devuelto: Optional[bool] = False
 
